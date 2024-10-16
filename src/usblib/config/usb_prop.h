@@ -35,14 +35,17 @@
 #define HID_REPORT_DESCRIPTOR   0x22
 
 
+#define USBD_Status_In NOP_Process
+#define 	USBD_Status_Out NOP_Process
+
 #define USBD_GetConfiguration          NOP_Process
 // #define USBD_SetConfiguration          NOP_Process
 #define USBD_GetInterface              NOP_Process
 #define USBD_SetInterface              NOP_Process
 #define USBD_GetStatus                 NOP_Process
-// #define USBD_ClearFeature              NOP_Process
+#define USBD_ClearFeature              NOP_Process
 #define USBD_SetEndPointFeature        NOP_Process
-// #define USBD_SetDeviceFeature          NOP_Process
+#define USBD_SetDeviceFeature          NOP_Process
 // #define USBD_SetDeviceAddress          NOP_Process
 
 

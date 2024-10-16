@@ -2,7 +2,7 @@
 #define __HIDIO_H_
 
 #include "bsp.h"
-#include "keyscan.h"
+// #include "keyscan.h"
 
 // Need -fshort-enums
 
@@ -46,38 +46,10 @@ typedef struct {
   uint8_t payload[62];
 } __packed DataReceive;
 
-const static uint8_t hid_key_map[KEY_COUNT][2] = {
-    // COL1
-    {0},
-    {0x00, 0x01}, // LA
-    {0x00, 0x20}, // LB
-    {0x00, 0x10}, // LC
-
-    {0x01, 0x40}, // RSide
-
-    // COL2
-    {0},
-    {0x00, 0x02}, // RA
-    {0x02, 0x01}, // RB
-    {0x01, 0x80}, // RC
-
-    {0x03, 0x80}, // LSide
-
-    // COL3
-    {0x03, 0x40}, // LMenu
-    {0x01, 0x20}, // RMenu
-    {0x01, 0x02}, // Service
-    {0x00, 0x40}, // Test
-    {0},
-
-    // COIN
-    {0}, // Coin
-};
-
-void HIDIO_Init();
+// void HIDIO_Init();
 void HIDIO_Receive_Handler();
 void HIDIO_Upload();
-void HIDIO_Update();
+// void HIDIO_Update();
 
 extern uint8_t HID_Buffer_OUT[64];
 extern uint8_t HID_Buffer_IN[64];

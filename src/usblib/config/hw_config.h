@@ -13,13 +13,6 @@
 #define __HW_CONFIG_H
 
 #include "usb_type.h" 
- 
-#ifdef	DEBUG
-#define printf_usb(X...) printf(X)
-#else
-#define printf_usb(X...)
-#endif 
-
 
 void Set_USBConfig(void);
 void Enter_LowPowerMode(void);

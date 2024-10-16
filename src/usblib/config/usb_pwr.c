@@ -15,7 +15,7 @@
 #include "hw_config.h"
 
 __IO uint32_t bDeviceState = UNCONNECTED; 
-__IO bool fSuspendEnabled = TRUE;  
+__IO bool fSuspendEnabled = FALSE;  
 __IO uint32_t EP[8];
 
 struct

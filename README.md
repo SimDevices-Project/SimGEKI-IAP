@@ -1,8 +1,8 @@
-# Firmware for SimGETRO (CH32V203 based)
+# IAP for SimGETRO (CH32V203 based)
 
 ![License AGPL-3.0](https://img.shields.io/github/license/SimDevices-Project/SimGEKI.svg)
 
-The repository for firmware of SimGETRO designed based on the ch32v203 chip.
+The repository for IAP program of SimGETRO designed based on the ch32v203 chip.
 
 ## Compiling
 
@@ -35,6 +35,3 @@ You must not use any name, including product name and trademark, that is associa
 ## Special Thanks
 
 This project referenced these projects
-
-- [ONGEEKi Firmware](https://github.com/GEEKiDoS/ongeeki-firmware) - GEEKiDoS
-- [Arduino-Aime-Reader](https://github.com/Sucareto/Arduino-Aime-Reader) - Sucareto
