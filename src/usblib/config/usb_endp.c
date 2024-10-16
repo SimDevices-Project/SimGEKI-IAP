@@ -19,7 +19,7 @@
 
 // #include "cdc.h"
 
-#include "hidio.h"
+#include "iap.h"
 
 /*********************************************************************
  * @fn      EP1_IN_Callback

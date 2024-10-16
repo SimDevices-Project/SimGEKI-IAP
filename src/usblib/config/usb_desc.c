@@ -13,20 +13,20 @@
 #include "usb_desc.h"
 
 /* USB Device Descriptors */
-const uint8_t USBD_DeviceDescriptor[] = {
+const uint8_t USBD_DeviceDescriptor[USBD_SIZE_DEVICE_DESC] = {
     USBD_SIZE_DEVICE_DESC,        // bLength
     0x01,                         // bDescriptorType
     0x10, 0x01,                   // bcdUSB
-    0xEF,                         // bDeviceClass
-    0x02,                         // bDeviceSubClass
-    0x01,                         // bDeviceProtocol
+    0x00,                         // bDeviceClass
+    0x00,                         // bDeviceSubClass
+    0x00,                         // bDeviceProtocol
     DEF_USBD_UEP0_SIZE,           // bMaxPacketSize0
     VENDOR_ID_L, VENDOR_ID_H,     // 厂商ID
     PRODUCT_ID_L, PRODUCT_ID_H,   // 产品ID
     PRODUCT_BCD_L, PRODUCT_BCD_H, // 设备版本号
     0x01,                         // iManufacturer
     0x02,                         // iProduct
-    0x03,                         // iSerialNumber
+    0x00,                         // iSerialNumber
     0x01,                         // bNumConfigurations
 };
 
@@ -53,7 +53,7 @@ const uint8_t USBD_ConfigDescriptor[USBD_SIZE_CONFIG_DESC] = {
     0x00, // bInterfaceProtocol
     0x00, // iInterface (String Index)
 
-    /* interface 4 HID descriptor */
+    /* interface 0 HID descriptor */
     0x09,                                                     // bLength
     0x21,                                                     // bDescriptorType
     0x11, 0x01,                                               // bcdHID
@@ -62,7 +62,7 @@ const uint8_t USBD_ConfigDescriptor[USBD_SIZE_CONFIG_DESC] = {
     0x22,                                                     // bDescriptorType
     USBD_SIZE_REPORT_DESC & 0xFF, USBD_SIZE_REPORT_DESC >> 8, // wDescriptorLength
 
-    /* interface 4 endpoint descriptor*/
+    /* interface 0 endpoint descriptor*/
     0x07,       // bLength
     0x05,       // bDescriptorType (Endpoint)
     0x81,       // bEndpointAddress (IN/D2H)
@@ -102,20 +102,24 @@ const uint8_t USBD_StringProduct[USBD_SIZE_STRING_PRODUCT] = {
 /* HID Report Descriptor */
 const uint8_t USBD_HidRepDesc[USBD_SIZE_REPORT_DESC] =
     {
-        0x06, 0x00, 0xFF, // Usage Page (Vendor Defined 0xFF00)
-        0x09, 0x01,       // Usage (0x01)
+        0x05, 0x01,       // Usage Page (Vendor Defined 0xFF00)
+        0x09, 0x00,       // Usage (0x00)
         0xA1, 0x01,       // Collection (Application)
-        0x09, 0x02,       //   Usage (0x02)
-        0x26, 0xFF, 0x00, //   Logical Maximum (255)
-        0x75, 0x08,       //   Report Size (8)
-        0x15, 0x00,       //   Logical Minimum (0)
-        0x95, 0x40,       //   Report Count (64)
-        0x81, 0x06,       //   Input (Data,Var,Rel,No Wrap,Linear,Preferred State,No Null Position)
-        0x09, 0x02,       //   Usage (0x02)
-        0x15, 0x00,       //   Logical Minimum (0)
-        0x26, 0xFF, 0x00, //   Logical Maximum (255)
-        0x75, 0x08,       //   Report Size (8)
-        0x95, 0x40,       //   Report Count (64)
-        0x91, 0x06,       //   Output (Data,Var,Rel,No Wrap,Linear,Preferred State,No Null Position,Non-volatile)
+        0x09, 0x00,       //   Usage (0x00)
+        0x85, 0xAA,       //   Report ID (170  0xAA)
+        0xA1, 0x01,       //   Collection (Application)
+        0x09, 0x00,       //     Usage (0x00)
+        0x26, 0xFF, 0x00, //     Logical Maximum (255)
+        0x75, 0x08,       //     Report Size (8)
+        0x15, 0x00,       //     Logical Minimum (0)
+        0x95, 0x3F,       //     Report Count (63)
+        0x81, 0x02,       //     Input (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position)
+        0x09, 0x00,       //     Usage (0x00)
+        0x15, 0x00,       //     Logical Minimum (0)
+        0x26, 0xFF, 0x00, //     Logical Maximum (255)
+        0x75, 0x08,       //     Report Size (8)
+        0x95, 0x3F,       //     Report Count (63)
+        0x91, 0x02,       //     Output (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position,Non-volatile)
+        0xC0,             //   End Collection
         0xC0,             // End Collection
 };

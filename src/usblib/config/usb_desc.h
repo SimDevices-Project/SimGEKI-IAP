@@ -35,12 +35,12 @@ extern "C" {
 
 #define USB_IAD_DESCRIPTOR_TYPE           0x0B
 
-#define DEF_USBD_UEP0_SIZE                64
+#define DEF_USBD_UEP0_SIZE                32
 #define DEF_USBD_MAX_PACK_SIZE            64
 
 #define USBD_SIZE_DEVICE_DESC             18
 #define USBD_SIZE_CONFIG_DESC             41
-#define USBD_SIZE_REPORT_DESC             34
+#define USBD_SIZE_REPORT_DESC             40
 
 #define USBD_NUMOF_STRING_DESC            3
 
