@@ -338,28 +338,3 @@ RESULT USBD_Data_Setup(uint8_t RequestNo)
   }
   return USB_SUCCESS;
 }
-
-/*********************************************************************
- * @fn      USBD_NoData_Setup.
- *
- * @brief   handle the no data class specific requests.
- *
- * @param   Request Nb.
- *
- * @return  USB_UNSUPPORT or USB_SUCCESS.
- */
-RESULT USBD_NoData_Setup(uint8_t RequestNo)
-{
-  uint32_t Request_No = pInformation->USBbRequest;
-
-  if (Type_Recipient == (CLASS_REQUEST | INTERFACE_RECIPIENT)) {
-    if (Request_No == CDC_SET_LINE_CTLSTE) {
-
-    } else if (Request_No == CDC_SEND_BREAK) {
-
-    } else {
-      return USB_UNSUPPORT;
-    }
-  }
-  return USB_SUCCESS;
-}

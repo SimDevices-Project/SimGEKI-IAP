@@ -36,7 +36,9 @@
 
 
 #define USBD_Status_In NOP_Process
-#define 	USBD_Status_Out NOP_Process
+#define USBD_Status_Out NOP_Process
+// #define USBD_Data_Setup NOP_Process
+#define USBD_NoData_Setup NOP_Process
 
 #define USBD_GetConfiguration          NOP_Process
 // #define USBD_SetConfiguration          NOP_Process
@@ -54,12 +56,12 @@ void USBD_init(void);
 void USBD_Reset(void);
 void USBD_SetConfiguration(void);
 void USBD_SetDeviceAddress (void);
-void USBD_SetDeviceFeature (void);
-void USBD_ClearFeature (void);
-void USBD_Status_In (void);
-void USBD_Status_Out (void);
+// void USBD_SetDeviceFeature (void);
+// void USBD_ClearFeature (void);
+// void USBD_Status_In (void);
+// void USBD_Status_Out (void);
 RESULT USBD_Data_Setup(uint8_t);
-RESULT USBD_NoData_Setup(uint8_t);
+// RESULT USBD_NoData_Setup(uint8_t);
 RESULT USBD_Get_Interface_Setting(uint8_t Interface, uint8_t AlternateSetting);
 uint8_t *USBD_GetDeviceDescriptor(uint16_t );
 uint8_t *USBD_GetConfigDescriptor(uint16_t);
