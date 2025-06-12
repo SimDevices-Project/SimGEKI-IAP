@@ -42,7 +42,7 @@ const uint8_t USBD_ConfigDescriptor[USBD_SIZE_CONFIG_DESC] = {
     0x80,                                                     // bmAttributes: Bus Powered
     0x32,                                                     // MaxPower: 100mA
 
-    /* interface 0 (HID interface) descriptor */
+    /* (HID interface) descriptor */
     0x09, // bLength
     0x04, // bDescriptorType (Interface)
     0x00, // bInterfaceNumber 0
@@ -53,7 +53,7 @@ const uint8_t USBD_ConfigDescriptor[USBD_SIZE_CONFIG_DESC] = {
     0x00, // bInterfaceProtocol
     0x00, // iInterface (String Index)
 
-    /* interface 0 HID descriptor */
+    /* HID descriptor */
     0x09,                                                     // bLength
     0x21,                                                     // bDescriptorType
     0x11, 0x01,                                               // bcdHID
@@ -62,7 +62,7 @@ const uint8_t USBD_ConfigDescriptor[USBD_SIZE_CONFIG_DESC] = {
     0x22,                                                     // bDescriptorType
     USBD_SIZE_REPORT_DESC & 0xFF, USBD_SIZE_REPORT_DESC >> 8, // wDescriptorLength
 
-    /* interface 0 endpoint descriptor*/
+    /* endpoint descriptor*/
     0x07,       // bLength
     0x05,       // bDescriptorType (Endpoint)
     0x81,       // bEndpointAddress (IN/D2H)
@@ -70,14 +70,13 @@ const uint8_t USBD_ConfigDescriptor[USBD_SIZE_CONFIG_DESC] = {
     0x40, 0x00, // wMaxPacketSize 64
     0x01,       // bInterval 1 (unit depends on device speed)
 
-    /* interface 4 endpoint descriptor */
+    /* endpoint descriptor */
     0x07,       // bLength
     0x05,       // bDescriptorType (Endpoint)
     0x01,       // bEndpointAddress (OUT/H2D)
     0x03,       // bmAttributes (Interrupt)
     0x40, 0x00, // wMaxPacketSize 64
-    0x05,       // bInterval 5 (unit depends on device speed)
-
+    0x01,       // bInterval 5 (unit depends on device speed)
 };
 
 /* USB String Descriptors */
