@@ -1,10 +1,7 @@
-#ifndef __HIDIO_H_
-#define __HIDIO_H_
+#ifndef __IAP_H_
+#define __IAP_H_
 
 #include "bsp.h"
-// #include "keyscan.h"
-
-// Need -fshort-enums
 
 typedef enum {
   CMD_IAP_RESET      = 0xA1,
@@ -29,14 +26,11 @@ typedef struct {
   uint8_t data[61];
 } __packed DataReceive;
 
-// void HIDIO_Init();
-void HIDIO_Receive_Handler();
-void HIDIO_Upload();
-// void HIDIO_Update();
+void HIDIO_Receive_Handler(void);
+void HIDIO_Upload(void);
 
 extern uint8_t HID_Buffer_OUT[64];
 extern uint8_t HID_Buffer_IN[64];
-
 extern volatile uint8_t JMP_FLAG;
 
-#endif // !__HIDIO_H_
+#endif // !__IAP_H_

@@ -4,12 +4,19 @@
  */
 
 #include "bsp.h"
-
 #include "usb_lib.h"
-
-#include "debug.h"
-
 #include "iap.h"
+
+// Simple delay using NOP instructions
+static void Delay_MS(uint32_t ms)
+{
+  uint32_t i, j;
+  for (i = 0; i < ms; i++) {
+    for (j = 0; j < 12000; j++) {  // Approximate 1ms at 96MHz
+      __asm__("nop");
+    }
+  }
+}
 
 void IAP_2_APP(void)
 {
@@ -36,7 +43,7 @@ uint8_t Input_Check(void)
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-  Delay_Ms(5);
+  Delay_MS(5);
 
   return GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_4);
 }
@@ -48,17 +55,16 @@ int main(void)
 
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
 
-  Delay_Init();
-
   Set_USBConfig();
   USB_Init();
   USB_Interrupts_Config();
 
-  Delay_Ms(20);
+  Delay_MS(20);
 
   if (Input_Check() != 0) {
     JMP_FLAG = 1;
   }
+  
   while (1) {
     if (JMP_FLAG) {
       IAP_2_APP();

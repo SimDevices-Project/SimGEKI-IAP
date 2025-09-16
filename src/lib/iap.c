@@ -1,15 +1,8 @@
 #include "iap.h"
-// #include "ch422.h"
-// #include "keyscan.h"
-// #include "roller.h"
-
-// #include "debug.h"
-
 #include "usb_lib.h"
 #include "usb_prop.h"
 
 #define OUT_EP       ENDP1
-
 #define FLASH_Base   0x08002800 // 10K
 
 #define STATE_SCUESS 0x00
@@ -25,8 +18,6 @@ uint8_t HID_Buffer_IN[64]  = {0x00};
 
 DataReceive *receive = (DataReceive *)HID_Buffer_OUT;
 DataUpload *upload   = (DataUpload *)HID_Buffer_IN;
-
-// const uint8_t bitPosMap[] = {23, 20, 22, 19, 21, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6};
 
 uint32_t activeAddr = FLASH_Base;
 
