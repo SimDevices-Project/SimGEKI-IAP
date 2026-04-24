@@ -12,7 +12,7 @@ static void Delay_MS(uint32_t ms)
 {
   uint32_t i, j;
   for (i = 0; i < ms; i++) {
-    for (j = 0; j < 12000; j++) {  // Approximate 1ms at 96MHz
+    for (j = 0; j < 12000; j++) { // Approximate 1ms at 96MHz
       __asm__("nop");
     }
   }
@@ -20,8 +20,19 @@ static void Delay_MS(uint32_t ms)
 
 void IAP_2_APP(void)
 {
+  NVIC_DisableIRQ(USB_LP_CAN1_RX0_IRQn);
+  NVIC_DisableIRQ(USBWakeUp_IRQn);
+
+  _SetISTR(0);
+  _SetCNTR(CNTR_FRES);
+  _SetCNTR(CNTR_FRES | CNTR_PDWN);
+
+  USB_Port_Set(DISABLE, DISABLE);
+
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_USB, DISABLE);
-  Delay_Ms(30);
+
+  Delay_MS(100);
+
   NVIC_EnableIRQ(Software_IRQn);
   NVIC_SetPendingIRQ(Software_IRQn);
 }
@@ -55,16 +66,17 @@ int main(void)
 
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
 
-  Set_USBConfig();
-  USB_Init();
-  USB_Interrupts_Config();
-
-  Delay_MS(20);
+  Delay_MS(10);
 
   if (Input_Check() != 0) {
-    JMP_FLAG = 1;
+    IAP_2_APP();
+    while (1) {}
   }
-  
+
+  Set_USBConfig();
+  USB_Interrupts_Config();
+  USB_Init();
+
   while (1) {
     if (JMP_FLAG) {
       IAP_2_APP();

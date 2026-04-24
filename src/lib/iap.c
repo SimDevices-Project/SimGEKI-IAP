@@ -9,7 +9,7 @@
 #define STATE_ERROR  0x01
 #define STATE_FINISH 0x02
 
-uint8_t Fast_Program_Buf[390];
+// uint8_t Fast_Program_Buf[390];
 
 volatile uint8_t JMP_FLAG = 0;
 
@@ -65,7 +65,7 @@ void HIDIO_Receive_Handler()
         }
         case CMD_IAP_PROM_END: {
           for (i = 0; i < (256 - codeBuffIndex); i++) { // 此处i需要是u16，否则CodeLen=0会死循环
-            Fast_Program_Buf[codeBuffIndex + i] = 0x00;
+            codeBuffer[codeBuffIndex + i] = 0x00;
           }
           if (codeBuffIndex > 0) {
             FLASH_Unlock_Fast();
