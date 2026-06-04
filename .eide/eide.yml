@@ -32,6 +32,22 @@ targets:
       - Startup/startup_ch32v30x_D8.S
       - sdk/Startup/startup_ch32v20x_D8W.S
       - sdk/Startup/startup_ch32v20x_D8.S
+      - sdk/Debug/debug.c
+      - sdk/Peripheral/src/ch32v20x_adc.c
+      - sdk/Peripheral/src/ch32v20x_bkp.c
+      - sdk/Peripheral/src/ch32v20x_can.c
+      - sdk/Peripheral/src/ch32v20x_crc.c
+      - sdk/Peripheral/src/ch32v20x_dbgmcu.c
+      - sdk/Peripheral/src/ch32v20x_dma.c
+      - sdk/Peripheral/src/ch32v20x_i2c.c
+      - sdk/Peripheral/src/ch32v20x_iwdg.c
+      - sdk/Peripheral/src/ch32v20x_opa.c
+      - sdk/Peripheral/src/ch32v20x_pwr.c
+      - sdk/Peripheral/src/ch32v20x_rtc.c
+      - sdk/Peripheral/src/ch32v20x_spi.c
+      - sdk/Peripheral/src/ch32v20x_tim.c
+      - sdk/Peripheral/src/ch32v20x_usart.c
+      - sdk/Peripheral/src/ch32v20x_wwdg.c
     settings:
       debugger: cortex-debug
     toolchain: RISCV_GCC
@@ -46,7 +62,7 @@ targets:
               command: riscv-none-embed-objdump --source --all-headers --demangle --disassemble "${OutDir}\${targetName}.elf" > "${OutDir}\${targetName}.lst"
               disable: false
           asm-compiler:
-            ASM_FLAGS: -Wl,-Bstatic
+            ASM_FLAGS: -Wl,-Bstatic -flto
           beforeBuildTasks: []
           c/cpp-compiler:
             C_FLAGS: -Wl, -Bstatic -fshort-enums
@@ -60,11 +76,11 @@ targets:
             abi: ilp32
             arch: rv32imac
             code-model: medany
-            misc-control: -msmall-data-limit=8 -msave-restore -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized --specs=nano.specs --specs=nosys.specs
+            misc-control: -msmall-data-limit=8 -msave-restore -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized --specs=nano.specs --specs=nosys.specs -flto
             output-debug-info: enable
           linker:
             $toolName: auto
-            LD_FLAGS: -Xlinker --gc-sections -nostartfiles -T "sdk/Ld/Link.ld"
+            LD_FLAGS: -flto -Xlinker --gc-sections -nostartfiles -T "sdk/Ld/Link.ld"
             output-format: elf
             remove-unused-input-sections: true
     uploadConfigMap:

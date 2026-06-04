@@ -16,8 +16,8 @@ __IO uint16_t SaveRState;
 __IO uint16_t SaveTState;
 
 /* Extern variables */
-extern void (*pEpInt_IN[7])(void);    /*  Handles IN  interrupts   */
-extern void (*pEpInt_OUT[7])(void);   /*  Handles OUT interrupts   */
+extern void (*pEpInt_IN[EP_NUM - 1])(void);    /*  Handles IN  interrupts   */
+extern void (*pEpInt_OUT[EP_NUM - 1])(void);   /*  Handles OUT interrupts   */
 
 /*******************************************************************************
  * @fn       CTR_LP.

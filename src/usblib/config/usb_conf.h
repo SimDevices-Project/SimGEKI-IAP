@@ -13,7 +13,7 @@
 #ifndef __USB_CONF_H
 #define __USB_CONF_H
 
-#define EP_NUM (15)
+#define EP_NUM (2)
 
 /* Buffer Description Table */
 /* buffer table base address */
@@ -38,7 +38,7 @@
 /* by the device application software */
 // #define IMR_MSK (CNTR_CTRM  | CNTR_WKUPM | CNTR_SUSPM | CNTR_ERRM  | CNTR_SOFM | CNTR_ESOFM | CNTR_RESETM )
 
-#define IMR_MSK (CNTR_CTRM | CNTR_ERRM | CNTR_SOFM | CNTR_ESOFM | CNTR_RESETM)
+#define IMR_MSK (CNTR_CTRM | CNTR_ERRM | CNTR_RESETM)
 
 /* #define CTR_CALLBACK */
 /* #define DOVR_CALLBACK */
@@ -52,19 +52,6 @@
 /* CTR service routines */
 /* associated to defined endpoints */
 // #define  EP1_IN_Callback   NOP_Process
-#define EP2_IN_Callback NOP_Process
-#define EP3_IN_Callback NOP_Process
-#define EP4_IN_Callback NOP_Process
-#define EP5_IN_Callback NOP_Process
-#define EP6_IN_Callback NOP_Process
-#define EP7_IN_Callback NOP_Process
-
 // #define  EP1_OUT_Callback   NOP_Process
-#define EP2_OUT_Callback NOP_Process
-#define EP3_OUT_Callback NOP_Process
-#define EP4_OUT_Callback NOP_Process
-#define EP5_OUT_Callback NOP_Process
-#define EP6_OUT_Callback NOP_Process
-#define EP7_OUT_Callback NOP_Process
 
 #endif /* __USB_CONF_H */

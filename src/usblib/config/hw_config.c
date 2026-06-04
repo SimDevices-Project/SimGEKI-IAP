@@ -15,12 +15,9 @@
 #include "usb_istr.h"
 #include "hw_config.h"
 #include "usb_pwr.h"
-#include "string.h"
-#include "stdarg.h"
-#include "stdio.h"
 
-void USBWakeUp_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
-void USB_LP_CAN1_RX0_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
+void USBWakeUp_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast"), used, noinline));
+void USB_LP_CAN1_RX0_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast"), used, noinline));
 
 /*******************************************************************************
  * @fn        USBWakeUp_IRQHandler

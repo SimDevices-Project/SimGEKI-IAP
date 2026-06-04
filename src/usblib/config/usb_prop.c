@@ -15,6 +15,7 @@
 #include "usb_desc.h"
 #include "usb_pwr.h"
 #include "hw_config.h"
+#include "bsp.h"
 
 // #include "cdc.h"
 
@@ -133,7 +134,7 @@ void USBD_init(void)
   bDeviceState = UNCONNECTED;
 
   USB_Port_Set(DISABLE, DISABLE);
-  Delay_Ms(20);
+  Delay_MS(20);
   USB_Port_Set(ENABLE, ENABLE);
 }
 

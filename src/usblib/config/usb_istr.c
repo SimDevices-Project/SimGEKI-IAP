@@ -6,9 +6,9 @@
  * Description        : ISTR events interrupt service routines
 *********************************************************************************
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
-* Attention: This software (modified or not) and binary are used for 
+* Attention: This software (modified or not) and binary are used for
 * microcontroller manufactured by Nanjing Qinheng Microelectronics.
-*******************************************************************************/ 
+*******************************************************************************/
 #include "usb_lib.h"
 #include "usb_prop.h"
 #include "usb_pwr.h"
@@ -17,30 +17,15 @@
 uint16_t Ep0RxBlks;
 
 /* Private variables */
-__IO uint16_t wIstr;  
-__IO uint8_t bIntPackSOF = 0;  
-__IO uint32_t esof_counter =0;
-__IO uint32_t wCNTR=0;
+__IO uint16_t wIstr;
 
 /* function pointers to non-control endpoints service routines */
-void (*pEpInt_IN[7])(void) ={
+void (*pEpInt_IN[EP_NUM - 1])(void) = {
 	EP1_IN_Callback,
-	EP2_IN_Callback,
-	EP3_IN_Callback,
-	EP4_IN_Callback,
-	EP5_IN_Callback,
-	EP6_IN_Callback,
-	EP7_IN_Callback,
 };
 
-void (*pEpInt_OUT[7])(void) ={
+void (*pEpInt_OUT[EP_NUM - 1])(void) = {
 	EP1_OUT_Callback,
-	EP2_OUT_Callback,
-	EP3_OUT_Callback,
-	EP4_OUT_Callback,
-	EP5_OUT_Callback,
-	EP6_OUT_Callback,
-	EP7_OUT_Callback,
 };
 
 /*******************************************************************************
@@ -52,8 +37,6 @@ void (*pEpInt_OUT[7])(void) ={
  */
 void USB_Istr(void)
 {
-  uint32_t i=0;
-  __IO uint32_t EP[8];
   if ((*_pEPRxCount(0) & 0xFC00 )!= Ep0RxBlks)
   {
     *_pEPRxCount(0) |= (Ep0RxBlks & 0xFC00);
@@ -67,12 +50,12 @@ void USB_Istr(void)
 
 #ifdef SOF_CALLBACK
     SOF_Callback();
-		
+
 #endif
   }
 #endif
- 
-  
+
+
 #if (IMR_MSK & ISTR_CTR)
   if (wIstr & ISTR_CTR & wInterrupt_Mask)
   {
@@ -82,13 +65,13 @@ void USB_Istr(void)
 #endif
   }
 #endif
- 
+
 #if (IMR_MSK & ISTR_RESET)
   if (wIstr & ISTR_RESET & wInterrupt_Mask)
   {
     _SetISTR((uint16_t)CLR_RESET);
     Device_Property.Reset();
-    
+
 #ifdef RESET_CALLBACK
     RESET_Callback();
 #endif
@@ -147,31 +130,31 @@ void USB_Istr(void)
   if (wIstr & ISTR_ESOF & wInterrupt_Mask)
   {
     _SetISTR((uint16_t)CLR_ESOF);
-    
+
     if ((_GetFNR()&FNR_RXDP)!=0)
     {
       esof_counter ++;
-      
-      if ((esof_counter >3)&&((_GetCNTR()&CNTR_FSUSP)==0))
-      {           
 
-        wCNTR = _GetCNTR(); 
-      
+      if ((esof_counter >3)&&((_GetCNTR()&CNTR_FSUSP)==0))
+      {
+
+        wCNTR = _GetCNTR();
+
         for (i=0;i<8;i++) EP[i] = _GetENDPOINT(i);
-      
+
         wCNTR|=CNTR_FRES;
         _SetCNTR(wCNTR);
- 
+
         wCNTR&=~CNTR_FRES;
         _SetCNTR(wCNTR);
-      
+
         while((_GetISTR()&ISTR_RESET) == 0);
-  
+
         _SetISTR((uint16_t)CLR_RESET);
-   
+
         for (i=0;i<8;i++)
         _SetENDPOINT(i, EP[i]);
-      
+
         esof_counter = 0;
       }
     }
@@ -179,8 +162,8 @@ void USB_Istr(void)
     {
         esof_counter = 0;
     }
-    
-    Resume(RESUME_ESOF); 
+
+    Resume(RESUME_ESOF);
 
 #ifdef ESOF_CALLBACK
     ESOF_Callback();
@@ -188,7 +171,6 @@ void USB_Istr(void)
   }
 #endif
 } /* USB_Istr */
-
 
 
 

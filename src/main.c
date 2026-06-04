@@ -8,7 +8,7 @@
 #include "iap.h"
 
 // Simple delay using NOP instructions
-static void Delay_MS(uint32_t ms)
+void Delay_MS(uint32_t ms)
 {
   uint32_t i, j;
   for (i = 0; i < ms; i++) {
